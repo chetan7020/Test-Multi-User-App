@@ -1,11 +1,13 @@
 package com.codizcdp.test_multi_user_app;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -20,19 +22,13 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
     private Button btnNext;
 
-    private void init(){
+    private void init() {
         firebaseFirestore = FirebaseFirestore.getInstance();
 
         btnNext = findViewById(R.id.btnNext);
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        init();
-
+    private void insertData() {
         Map<String, Object> user = new HashMap<>();
         user.put("first", "Alan");
         user.put("middle", "Mathison");
@@ -50,8 +46,24 @@ public class MainActivity extends AppCompatActivity {
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Log.d(TAG, "onFailure: "+e.getMessage());
+                        Log.d(TAG, "onFailure: " + e.getMessage());
                     }
                 });
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        init();
+
+        btnNext.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, RetrieveInBatchActivity.class));
+            }
+        });
+
     }
 }
