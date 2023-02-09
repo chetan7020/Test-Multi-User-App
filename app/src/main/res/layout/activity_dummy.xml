@@ -18,4 +18,13 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:text="Hello" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="10dp"
+        android:layout_marginLeft="100dp"
+        android:text="Button" />
 </LinearLayout>
